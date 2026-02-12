@@ -21,7 +21,7 @@ body {
 
 .hidden { display: none !important; }
 
-/* --- Step 1: Checkbox (Links) --- */
+/* --- Step 1: Checkbox (Fix für das Logo) --- */
 .captcha-box {
     background: #fff;
     border: 1px solid #d3d3d3;
@@ -31,18 +31,41 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 12px;
+    padding: 0 10px; /* Leicht reduziert für mehr Innenplatz */
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.08);
     position: absolute;
     left: 40px;
     z-index: 10;
+    box-sizing: border-box; /* Wichtig, damit Padding nicht die Breite sprengt */
 }
 
-.checkbox { width: 24px; height: 24px; border: 2px solid #c1c1c1; border-radius: 2px; cursor: pointer; }
+.checkbox-container { display: flex; align-items: center; }
+.checkbox { width: 24px; height: 24px; border: 2px solid #c1c1c1; cursor: pointer; background: #fff; border-radius: 2px; }
 .checkbox.loading { border-radius: 50%; border-top: 2px solid var(--captcha-blue); animation: spin 1s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* --- Step 2: Modal (Höher für iPhone) --- */
+/* Logo-Bereich fixiert */
+.captcha-logo { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    width: 70px; /* Feste Breite für das Logo-Areal */
+}
+
+.captcha-logo img { 
+    width: 28px; /* Etwas kleiner gemacht, damit es nicht oben/unten aneckt */
+    height: auto;
+    margin-bottom: 2px;
+}
+
+.privacy-links { 
+    font-size: 8px; 
+    color: #999; 
+    white-space: nowrap; /* Verhindert hässliche Zeilenumbrüche */
+    text-align: center;
+}
+
+/* --- Step 2: Modal --- */
 .captcha-modal {
     background: #fff;
     width: 95%;
@@ -59,18 +82,17 @@ body {
 .modal-header { background: var(--captcha-blue); color: #fff; padding: 20px 16px; margin-bottom: 8px; }
 .valentine-mode .modal-header { background: var(--valentine-pink); }
 .modal-header h1 { margin: 4px 0; font-size: 26px; font-weight: 700; }
-.grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-bottom: 8px; }
+.grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
 .tile { width: 100%; aspect-ratio: 1; background-size: 300% 300%; cursor: pointer; position: relative; }
 .tile.selected::after {
     content: '✓'; position: absolute; top: 5px; left: 5px; width: 22px; height: 22px;
     background: var(--captcha-blue); color: white; border-radius: 50%; display: flex;
-    justify-content: center; align-items: center; border: 2px solid #fff; font-size: 12px;
+    justify-content: center; align-items: center; border: 2px solid #fff;
 }
 .valentine-mode .tile.selected::after { background: var(--valentine-pink); content: '❤️'; }
 .modal-footer { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-top: 1px solid #ececec; }
 .verify-btn { background: var(--captcha-blue); color: #fff; border: none; padding: 12px 24px; font-weight: bold; cursor: pointer; }
 .valentine-mode .verify-btn { background: var(--valentine-pink); }
-.verify-btn:disabled { background: #ccc; cursor: default; }
 
 /* --- Step 3: Erfolgsschirm --- */
 .success-screen {
@@ -80,28 +102,41 @@ body {
 }
 
 .success-screen h1, .success-screen p {
-    background: rgba(255, 255, 255, 0.15); 
-    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-    padding: 20px 40px;
-    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.18); 
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    padding: 30px 50px;
+    border-radius: 40px;
     display: inline-block; 
-    width: fit-content;    /* PC-Fix: Kasten schmiegt sich an */
-    max-width: 90%;        /* iPhone-Fix: Passt in den Bildschirm */
+    width: fit-content;
+    max-width: 90%;
     box-sizing: border-box;
 }
 
 .success-screen h1 {
     color: #d81b60; 
-    font-size: 2.8em; /* Etwas kleiner, da die Schrift sehr wuchtig ist */
-    margin-bottom: 25px;
-    font-family: 'Permanent Marker', cursive; /* Die "dicke" Alternative */
-    text-shadow: 0px 0px 15px rgba(255, 255, 255, 1); 
+    font-size: 4em; 
+    margin-bottom: 30px;
+    font-family: 'Permanent Marker', cursive;
+    text-shadow: 0px 0px 20px rgba(255, 255, 255, 1); 
     animation: heartbeat 1.5s infinite;
+    line-height: 1.2;
 }
 
 .success-screen p {
     font-family: 'Georgia', serif; font-style: italic;
-    color: #fffdf5; font-size: 1.5em; text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5); 
+    color: #fffdf5; 
+    font-size: 1.8em; 
+    text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.6); 
+    margin-top: 0;
 }
 
-@keyframes heartbeat { 0%, 30% { transform: scale(1); } 15% { transform: scale(1.05); } }
+@keyframes heartbeat { 
+    0%, 30% { transform: scale(1); } 
+    15% { transform: scale(1.05); } 
+}
+
+@media (max-width: 600px) {
+    .success-screen h1 { font-size: 2.2em; padding: 20px; }
+    .success-screen p { font-size: 1.2em; padding: 15px; }
+    .captcha-box { left: 20px; width: 280px; } /* Anpassung für sehr kleine Bildschirme */
+}
