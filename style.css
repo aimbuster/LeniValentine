@@ -4,7 +4,6 @@
     --valentine-pink: #ff6b81;
 }
 
-/* Fix für die iPhone-Höhe (Adressleiste) */
 html, body {
     height: 100%;
     height: -webkit-fill-available;
@@ -36,35 +35,19 @@ body {
     padding: 0 12px;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.08);
     position: absolute;
-    left: 40px; /* Abstand vom linken Rand */
+    left: 40px;
     z-index: 10;
 }
 
 .checkbox-container { display: flex; align-items: center; }
-
-.checkbox {
-    width: 24px;
-    height: 24px;
-    border: 2px solid #c1c1c1;
-    border-radius: 2px;
-    margin-right: 12px;
-    cursor: pointer;
-    background: #fff;
-}
-
-.checkbox.loading {
-    border-radius: 50%;
-    border-top: 2px solid var(--captcha-blue);
-    animation: spin 1s linear infinite;
-}
-
+.checkbox { width: 24px; height: 24px; border: 2px solid #c1c1c1; border-radius: 2px; margin-right: 12px; cursor: pointer; background: #fff; }
+.checkbox.loading { border-radius: 50%; border-top: 2px solid var(--captcha-blue); animation: spin 1s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
-
 .captcha-logo { display: flex; flex-direction: column; align-items: center; font-size: 10px; color: #555; }
 .captcha-logo img { width: 32px; }
 .privacy-links { font-size: 8px; color: #999; }
 
-/* --- Step 2: Modal (Zentriert & Höher gesetzt für iPhone) --- */
+/* --- Step 2: Modal --- */
 .captcha-modal {
     background: #fff;
     width: 95%;
@@ -76,16 +59,13 @@ body {
     flex-direction: column;
     position: relative;
     z-index: 20;
-    /* Schiebt das Fenster hoch, damit der Button über der Safari-Leiste liegt: */
     margin-bottom: 80px; 
 }
 
 .modal-header { background: var(--captcha-blue); color: #fff; padding: 20px 16px; margin-bottom: 8px; }
 .valentine-mode .modal-header { background: var(--valentine-pink); }
 .modal-header h1 { margin: 4px 0; font-size: 26px; font-weight: 700; }
-
 .grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-bottom: 8px; }
-
 .tile { width: 100%; aspect-ratio: 1; background-size: 300% 300%; cursor: pointer; position: relative; }
 .tile.selected::after {
     content: '✓'; position: absolute; top: 5px; left: 5px; width: 22px; height: 22px;
@@ -93,7 +73,6 @@ body {
     justify-content: center; align-items: center; border: 2px solid #fff; font-size: 12px;
 }
 .valentine-mode .tile.selected::after { background: var(--valentine-pink); content: '❤️'; }
-
 .modal-footer { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-top: 1px solid #ececec; }
 .verify-btn { background: var(--captcha-blue); color: #fff; border: none; padding: 12px 24px; font-weight: bold; cursor: pointer; border-radius: 2px; }
 .valentine-mode .verify-btn { background: var(--valentine-pink); }
@@ -106,22 +85,33 @@ body {
     display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; z-index: 100;
 }
 
+/* FIX: Kasten passt sich jetzt dem Text an */
 .success-screen h1, .success-screen p {
     background: rgba(255, 255, 255, 0.15); 
     backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-    padding: 20px 30px; border-radius: 30px; display: inline-block; width: 80%;
+    padding: 20px 40px;
+    border-radius: 30px;
+    display: inline-block; 
+    width: fit-content;    /* <--- Passt Breite an Text an */
+    max-width: 85%;        /* <--- Verhindert Überlaufen am Handy */
+    box-sizing: border-box;
 }
 
 .success-screen h1 {
-    color: #d81b60; font-size: 3.2em; margin-bottom: 25px;
-    font-family: 'Great Vibes', cursive; /* iPhone-sicher */
+    color: #d81b60; 
+    font-size: 3.2em; 
+    margin-bottom: 25px;
+    font-family: 'Great Vibes', cursive;
     text-shadow: 0px 0px 15px rgba(255, 255, 255, 1); 
     animation: heartbeat 1.5s infinite;
 }
 
 .success-screen p {
-    font-family: 'Georgia', serif; font-style: italic;
-    color: #fffdf5; font-size: 1.5em; text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5); 
+    font-family: 'Georgia', serif; 
+    font-style: italic;
+    color: #fffdf5; 
+    font-size: 1.5em; 
+    text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5); 
 }
 
 @keyframes heartbeat { 0%, 30% { transform: scale(1); } 15% { transform: scale(1.04); } }
