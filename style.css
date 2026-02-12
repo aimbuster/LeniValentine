@@ -14,13 +14,14 @@ body {
     height: 100vh;
     background-color: #f0f0f0;
     margin: 0;
+    overflow: hidden;
 }
 
 .hidden {
     display: none !important;
 }
 
-/* --- Step 1: Checkbox --- */
+/* --- Step 1: Checkbox (Nach links verschoben) --- */
 .captcha-box {
     background: #fff;
     border: 1px solid #d3d3d3;
@@ -32,7 +33,9 @@ body {
     align-items: center;
     padding: 0 12px;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.08);
+    
     position: absolute;
+    left: 50px; /* Abstand von links */
     z-index: 10;
     transition: opacity 0.3s;
 }
@@ -65,7 +68,31 @@ body {
     100% { transform: rotate(360deg); }
 }
 
-/* --- Step 2: Das Modal --- */
+.checkbox-container label {
+    font-size: 14px;
+    color: #000;
+}
+
+.captcha-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 10px;
+    color: #555;
+}
+
+.captcha-logo img {
+    width: 32px;
+    margin-bottom: 2px;
+}
+
+.privacy-links {
+    font-size: 8px;
+    color: #999;
+    margin-top: 2px;
+}
+
+/* --- Step 2: Das Modal (Bleibt zentriert) --- */
 .captcha-modal {
     background: #fff;
     width: 400px;
@@ -76,19 +103,17 @@ body {
     flex-direction: column;
     position: relative;
     z-index: 20;
-    opacity: 0;
-    transform: scale(0.95);
     animation: popIn 0.3s forwards;
 }
 
 @keyframes popIn {
+    from { opacity: 0; transform: scale(0.95); }
     to { opacity: 1; transform: scale(1); }
 }
 
 .captcha-modal.valentine-mode {
     border: 2px solid var(--valentine-pink);
-    box-shadow: 0 0 20px rgba(255, 107, 129, 0.4);
-    transition: all 0.5s ease;
+    box-shadow: 0 0 25px rgba(255, 107, 129, 0.5);
 }
 
 .modal-header {
@@ -96,6 +121,7 @@ body {
     color: #fff;
     padding: 20px 16px;
     margin-bottom: 8px;
+    transition: background 0.5s;
 }
 
 .valentine-mode .modal-header {
@@ -106,13 +132,13 @@ body {
     margin: 4px 0;
     font-size: 28px;
     font-weight: 700;
+    transition: opacity 0.2s;
 }
 
 .grid-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2px;
-    margin-bottom: 8px;
 }
 
 .tile {
@@ -124,20 +150,32 @@ body {
 }
 
 .tile.selected::after {
-    content: '❤️';
+    content: '✓';
     position: absolute;
     top: 5px;
     left: 5px;
-    width: 20px;
-    height: 20px;
-    background: var(--valentine-pink);
+    width: 22px;
+    height: 22px;
+    background: var(--captcha-blue);
     color: white;
     border-radius: 50%;
-    font-size: 12px;
     display: flex;
     justify-content: center;
     align-items: center;
     border: 2px solid #fff;
+    font-size: 12px;
+}
+
+.valentine-mode .tile.selected::after {
+    background: var(--valentine-pink);
+    content: '❤️';
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
 }
 
 .verify-btn {
@@ -147,6 +185,11 @@ body {
     padding: 10px 24px;
     font-weight: bold;
     cursor: pointer;
+}
+
+.verify-btn:disabled {
+    background: #ccc;
+    cursor: default;
 }
 
 .valentine-mode .verify-btn {
@@ -172,7 +215,7 @@ body {
     z-index: 100;
 }
 
-/* Glassmorphism Schleier für maximale Lesbarkeit */
+/* Glassmorphism Effekt */
 .success-screen h1, .success-screen p {
     background: rgba(255, 255, 255, 0.15); 
     backdrop-filter: blur(10px);           
@@ -184,11 +227,10 @@ body {
 }
 
 .success-screen h1 {
-    color: #d81b60; /* Zurück auf das kontrastreiche Beerenrot/Pink */
+    color: #d81b60; /* Beerenrot für Kontrast */
     font-size: 3.5em;
     margin-bottom: 25px;
     font-family: 'Brush Script MT', cursive;
-    /* Weißer Schatten als "Heiligenschein" für die Schrift */
     text-shadow: 0px 0px 15px rgba(255, 255, 255, 1); 
     animation: heartbeat 1.5s infinite;
 }
@@ -196,11 +238,9 @@ body {
 .success-screen p {
     font-family: 'Georgia', serif; 
     font-style: italic;
-    color: #fffdf5; /* Warmes Elfenbein-Weiß */
+    color: #fffdf5; /* Cremeweiß */
     font-size: 1.6em;
-    font-weight: 400;
     max-width: 75%;
-    margin-top: 10px;
     text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5); 
 }
 
@@ -208,9 +248,4 @@ body {
     0% { transform: scale(1); }
     15% { transform: scale(1.04); }
     30% { transform: scale(1); }
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
 }
