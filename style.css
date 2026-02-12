@@ -3,7 +3,6 @@
     --captcha-blue: #4A90E2;
     --captcha-bg: #f9f9f9;
     --valentine-pink: #ff6b81;
-    --valentine-bg: #ffe4e8;
 }
 
 body {
@@ -17,11 +16,9 @@ body {
     overflow: hidden;
 }
 
-.hidden {
-    display: none !important;
-}
+.hidden { display: none !important; }
 
-/* --- Step 1: Checkbox (Nach links verschoben) --- */
+/* --- Step 1: Checkbox (Links positioniert) --- */
 .captcha-box {
     background: #fff;
     border: 1px solid #d3d3d3;
@@ -33,107 +30,42 @@ body {
     align-items: center;
     padding: 0 12px;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.08);
-    
     position: absolute;
-    left: 50px; /* Abstand von links */
+    left: 50px;
     z-index: 10;
-    transition: opacity 0.3s;
-}
-
-.checkbox-container {
-    display: flex;
-    align-items: center;
 }
 
 .checkbox {
     width: 24px;
     height: 24px;
     border: 2px solid #c1c1c1;
-    border-radius: 2px;
-    margin-right: 12px;
     cursor: pointer;
-    background: #fff;
-    transition: all 0.2s;
 }
 
 .checkbox.loading {
     border-radius: 50%;
-    border: 2px solid #ccc;
     border-top: 2px solid var(--captcha-blue);
     animation: spin 1s linear infinite;
 }
 
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
+@keyframes spin { to { transform: rotate(360deg); } }
 
-.checkbox-container label {
-    font-size: 14px;
-    color: #000;
-}
-
-.captcha-logo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 10px;
-    color: #555;
-}
-
-.captcha-logo img {
-    width: 32px;
-    margin-bottom: 2px;
-}
-
-.privacy-links {
-    font-size: 8px;
-    color: #999;
-    margin-top: 2px;
-}
-
-/* --- Step 2: Das Modal (Bleibt zentriert) --- */
+/* --- Step 2: Modal --- */
 .captcha-modal {
     background: #fff;
     width: 400px;
     border: 1px solid #ccc;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     padding: 8px;
-    display: flex;
-    flex-direction: column;
-    position: relative;
     z-index: 20;
-    animation: popIn 0.3s forwards;
-}
-
-@keyframes popIn {
-    from { opacity: 0; transform: scale(0.95); }
-    to { opacity: 1; transform: scale(1); }
-}
-
-.captcha-modal.valentine-mode {
-    border: 2px solid var(--valentine-pink);
-    box-shadow: 0 0 25px rgba(255, 107, 129, 0.5);
 }
 
 .modal-header {
     background: var(--captcha-blue);
     color: #fff;
     padding: 20px 16px;
-    margin-bottom: 8px;
-    transition: background 0.5s;
 }
 
-.valentine-mode .modal-header {
-    background: var(--valentine-pink);
-}
-
-.modal-header h1 {
-    margin: 4px 0;
-    font-size: 28px;
-    font-weight: 700;
-    transition: opacity 0.2s;
-}
+.valentine-mode .modal-header { background: var(--valentine-pink); }
 
 .grid-container {
     display: grid;
@@ -146,54 +78,13 @@ body {
     aspect-ratio: 1;
     background-size: 300% 300%;
     cursor: pointer;
-    position: relative;
 }
 
 .tile.selected::after {
-    content: '✓';
+    content: '❤️';
     position: absolute;
     top: 5px;
     left: 5px;
-    width: 22px;
-    height: 22px;
-    background: var(--captcha-blue);
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid #fff;
-    font-size: 12px;
-}
-
-.valentine-mode .tile.selected::after {
-    background: var(--valentine-pink);
-    content: '❤️';
-}
-
-.modal-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0;
-}
-
-.verify-btn {
-    background: var(--captcha-blue);
-    color: #fff;
-    border: none;
-    padding: 10px 24px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.verify-btn:disabled {
-    background: #ccc;
-    cursor: default;
-}
-
-.valentine-mode .verify-btn {
-    background: var(--valentine-pink);
 }
 
 /* --- Step 3: Erfolgsschirm --- */
@@ -204,9 +95,8 @@ body {
     width: 100vw;
     height: 100vh;
     background-image: url('assets/poppies.png');
-    background-repeat: no-repeat;
-    background-position: center;
     background-size: cover;
+    background-position: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -215,22 +105,20 @@ body {
     z-index: 100;
 }
 
-/* Glassmorphism Effekt */
 .success-screen h1, .success-screen p {
     background: rgba(255, 255, 255, 0.15); 
     backdrop-filter: blur(10px);           
     -webkit-backdrop-filter: blur(10px);
     padding: 20px 40px;
     border-radius: 30px;
-    display: inline-block;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .success-screen h1 {
-    color: #d81b60; /* Beerenrot für Kontrast */
+    color: #d81b60; 
     font-size: 3.5em;
     margin-bottom: 25px;
-    font-family: 'Brush Script MT', cursive;
+    /* Hier ist die neue Schrift für iPhone & PC */
+    font-family: 'Great Vibes', cursive; 
     text-shadow: 0px 0px 15px rgba(255, 255, 255, 1); 
     animation: heartbeat 1.5s infinite;
 }
@@ -238,9 +126,8 @@ body {
 .success-screen p {
     font-family: 'Georgia', serif; 
     font-style: italic;
-    color: #fffdf5; /* Cremeweiß */
-    font-size: 1.6em;
-    max-width: 75%;
+    color: #fffdf5; 
+    font-size: 1.5em;
     text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5); 
 }
 
