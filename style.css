@@ -65,30 +65,6 @@ body {
     100% { transform: rotate(360deg); }
 }
 
-.checkbox-container label {
-    font-size: 14px;
-    color: #000;
-}
-
-.captcha-logo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 10px;
-    color: #555;
-}
-
-.captcha-logo img {
-    width: 32px;
-    margin-bottom: 2px;
-}
-
-.privacy-links {
-    font-size: 8px;
-    color: #999;
-    margin-top: 2px;
-}
-
 /* --- Step 2: Das Modal --- */
 .captcha-modal {
     background: #fff;
@@ -120,28 +96,16 @@ body {
     color: #fff;
     padding: 20px 16px;
     margin-bottom: 8px;
-    transition: background 0.5s;
 }
 
 .valentine-mode .modal-header {
     background: var(--valentine-pink);
 }
 
-.modal-header h3 {
-    margin: 0;
-    font-size: 16px;
-    font-weight: 400;
-}
-
 .modal-header h1 {
     margin: 4px 0;
     font-size: 28px;
     font-weight: 700;
-}
-
-.modal-header p {
-    margin: 0;
-    font-size: 13px;
 }
 
 .grid-container {
@@ -157,21 +121,16 @@ body {
     background-size: 300% 300%;
     cursor: pointer;
     position: relative;
-    transition: transform 0.1s;
-}
-
-.tile:active {
-    transform: scale(0.98);
 }
 
 .tile.selected::after {
-    content: '✓';
+    content: '❤️';
     position: absolute;
     top: 5px;
     left: 5px;
     width: 20px;
     height: 20px;
-    background: var(--captcha-blue);
+    background: var(--valentine-pink);
     color: white;
     border-radius: 50%;
     font-size: 12px;
@@ -181,41 +140,13 @@ body {
     border: 2px solid #fff;
 }
 
-.valentine-mode .tile.selected::after {
-    background: var(--valentine-pink);
-    content: '❤️';
-}
-
-.modal-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 0;
-    border-top: 1px solid #ececec;
-}
-
-.icons {
-    color: #777;
-    font-size: 18px;
-    letter-spacing: 8px;
-    cursor: not-allowed;
-}
-
 .verify-btn {
     background: var(--captcha-blue);
     color: #fff;
     border: none;
     padding: 10px 24px;
     font-weight: bold;
-    border-radius: 2px;
     cursor: pointer;
-    font-family: 'Roboto', sans-serif;
-    transition: background 0.3s;
-}
-
-.verify-btn:disabled {
-    background: #ccc;
-    cursor: default;
 }
 
 .valentine-mode .verify-btn {
@@ -238,15 +169,14 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    animation: fadeIn 1s ease;
     z-index: 100;
 }
 
-/* Glassmorphism-Effekt für bessere Lesbarkeit auf den roten Blumen */
+/* Glassmorphism Schleier für maximale Lesbarkeit */
 .success-screen h1, .success-screen p {
-    background: rgba(255, 255, 255, 0.2); 
-    backdrop-filter: blur(8px);           /* Blumen im Hintergrund werden weichgezeichnet */
-    -webkit-backdrop-filter: blur(8px);
+    background: rgba(255, 255, 255, 0.15); 
+    backdrop-filter: blur(10px);           
+    -webkit-backdrop-filter: blur(10px);
     padding: 20px 40px;
     border-radius: 30px;
     display: inline-block;
@@ -254,10 +184,11 @@ body {
 }
 
 .success-screen h1 {
-    color: #bc1b1b; /* Ein wärmeres Kirschrot */
+    color: #d81b60; /* Zurück auf das kontrastreiche Beerenrot/Pink */
     font-size: 3.5em;
     margin-bottom: 25px;
     font-family: 'Brush Script MT', cursive;
+    /* Weißer Schatten als "Heiligenschein" für die Schrift */
     text-shadow: 0px 0px 15px rgba(255, 255, 255, 1); 
     animation: heartbeat 1.5s infinite;
 }
@@ -265,13 +196,12 @@ body {
 .success-screen p {
     font-family: 'Georgia', serif; 
     font-style: italic;
-    color: #fffdf5; /* Dein Wunsch-Cremeweiß */
+    color: #fffdf5; /* Warmes Elfenbein-Weiß */
     font-size: 1.6em;
     font-weight: 400;
     max-width: 75%;
     margin-top: 10px;
-    /* Warmer, dunklerer Schatten für Kontrast */
-    text-shadow: 1px 1px 8px rgba(40, 0, 0, 0.5); 
+    text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5); 
 }
 
 @keyframes heartbeat {
@@ -283,26 +213,4 @@ body {
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
-}
-
-/* Confetti Bubbles */
-.loading-dots {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-}
-
-.dot {
-    width: 8px;
-    height: 8px;
-    margin: 0 3px;
-    background-color: #fff;
-    border-radius: 50%;
-    animation: bounce 1.4s infinite ease-in-out both;
-}
-
-@keyframes bounce {
-    0%, 80%, 100% { transform: scale(0); }
-    40% { transform: scale(1); }
 }
