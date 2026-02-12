@@ -1,58 +1,45 @@
 <!DOCTYPE html>
 <html lang="de">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sicherheitsüberprüfung</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
-    <div class="main-container">
-
-        <div class="captcha-box" id="step-checkbox">
-            <div class="checkbox-container">
-                <div class="checkbox" id="checkbox-btn"></div>
-                <label>Ich bin kein Roboter</label>
-            </div>
-            <div class="captcha-logo">
-                <img src="https://www.gstatic.com/recaptcha/api2/logo_48.png" alt="logo">
-                <span>reCAPTCHA</span>
-                <div class="privacy-links">Datenschutz - Bedingungen</div>
-            </div>
+    <div id="step-checkbox" class="captcha-box">
+        <div class="checkbox-container">
+            <div id="checkbox-btn" class="checkbox"></div>
+            <label>Ich bin kein Roboter</label>
         </div>
-
-        <div class="captcha-modal hidden" id="captcha-modal">
-            <div class="modal-header" id="modal-header">
-                <h3>Select all images with</h3>
-                <h1 id="instruction-text">Your Valentine</h1>
-                <p>Klicke auf Bestätigen, sobald keine mehr übrig sind.</p>
-            </div>
-
-            <div class="grid-container" id="grid">
-                </div>
-
-            <div class="modal-footer">
-                <div class="icons">
-                    <span class="icon-refresh">↺</span>
-                    <span class="icon-audio">🎧</span>
-                    <span class="icon-info">ⓘ</span>
-                </div>
-                <button class="verify-btn" id="verify-btn" disabled>BESTÄTIGEN</button>
-            </div>
+        <div class="captcha-logo">
+            <img src="https://www.gstatic.com/recaptcha/api2/logo_48.png" alt="reCAPTCHA">
+            <div class="privacy-links">Datenschutz - Bedingungen</div>
         </div>
+    </div>
 
-        <div class="success-screen hidden" id="success-screen">
-            <h1>❤️ Alles Liebe zum Valentinstag, Leni! ❤️</h1>
-            <p>Sicherheitscheck bestanden: 0% Roboter, 100% Traumfrau. <br> Dein Platz in meinem Herzen ist hiermit offiziell verifiziert.</p>
+    <div id="captcha-modal" class="captcha-modal hidden">
+        <div id="modal-header" class="modal-header">
+            <h3 id="modal-subtext">Wählen Sie alle Quadrate mit</h3>
+            <h1 id="instruction-text">Ampeln</h1>
+            <p>aus, falls keine vorhanden sind, klicken Sie auf Überspringen.</p>
         </div>
+        <div id="grid" class="grid-container">
+            </div>
+        <div class="modal-footer">
+            <div class="icons">🔄 🎧 ℹ️</div>
+            <button id="verify-btn" class="verify-btn" disabled>BESTÄTIGEN</button>
+        </div>
+    </div>
 
+    <div id="success-screen" class="success-screen hidden">
+        <h1>❤️ Alles Liebe zum Valentinstag, Leni! ❤️</h1>
+        <p>Sicherheitscheck bestanden: 0% Roboter, 100% Traumfrau.<br>
+           Dein Platz in meinem Herzen ist hiermit offiziell verifiziert.</p>
     </div>
 
     <script src="script.js"></script>
 </body>
-
 </html>
