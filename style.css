@@ -4,20 +4,26 @@
     --valentine-pink: #ff6b81;
 }
 
+/* Fix für die iPhone-Höhe (Adressleiste) */
+html, body {
+    height: 100%;
+    height: -webkit-fill-available;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
 body {
     font-family: 'Roboto', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     background-color: #f0f0f0;
-    margin: 0;
-    overflow: hidden;
 }
 
 .hidden { display: none !important; }
 
-/* --- Step 1: Checkbox (Links positioniert) --- */
+/* --- Step 1: Checkbox (Links) --- */
 .captcha-box {
     background: #fff;
     border: 1px solid #d3d3d3;
@@ -30,7 +36,7 @@ body {
     padding: 0 12px;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.08);
     position: absolute;
-    left: 50px; /* Hier kannst du den Abstand von links anpassen */
+    left: 40px; /* Abstand vom linken Rand */
     z-index: 10;
 }
 
@@ -58,10 +64,11 @@ body {
 .captcha-logo img { width: 32px; }
 .privacy-links { font-size: 8px; color: #999; }
 
-/* --- Step 2: Modal (Bleibt zentriert & stabil) --- */
+/* --- Step 2: Modal (Zentriert & Höher gesetzt für iPhone) --- */
 .captcha-modal {
     background: #fff;
-    width: 400px;
+    width: 95%;
+    max-width: 400px;
     border: 1px solid #ccc;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     padding: 8px;
@@ -69,11 +76,13 @@ body {
     flex-direction: column;
     position: relative;
     z-index: 20;
+    /* Schiebt das Fenster hoch, damit der Button über der Safari-Leiste liegt: */
+    margin-bottom: 80px; 
 }
 
 .modal-header { background: var(--captcha-blue); color: #fff; padding: 20px 16px; margin-bottom: 8px; }
 .valentine-mode .modal-header { background: var(--valentine-pink); }
-.modal-header h1 { margin: 4px 0; font-size: 28px; font-weight: 700; }
+.modal-header h1 { margin: 4px 0; font-size: 26px; font-weight: 700; }
 
 .grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-bottom: 8px; }
 
@@ -86,7 +95,7 @@ body {
 .valentine-mode .tile.selected::after { background: var(--valentine-pink); content: '❤️'; }
 
 .modal-footer { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-top: 1px solid #ececec; }
-.verify-btn { background: var(--captcha-blue); color: #fff; border: none; padding: 10px 24px; font-weight: bold; cursor: pointer; }
+.verify-btn { background: var(--captcha-blue); color: #fff; border: none; padding: 12px 24px; font-weight: bold; cursor: pointer; border-radius: 2px; }
 .valentine-mode .verify-btn { background: var(--valentine-pink); }
 .verify-btn:disabled { background: #ccc; cursor: default; }
 
@@ -100,21 +109,19 @@ body {
 .success-screen h1, .success-screen p {
     background: rgba(255, 255, 255, 0.15); 
     backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-    padding: 20px 40px; border-radius: 30px; display: inline-block;
+    padding: 20px 30px; border-radius: 30px; display: inline-block; width: 80%;
 }
 
 .success-screen h1 {
-    color: #d81b60; /* Kontrast-Beerenrot */
-    font-size: 3.5em; margin-bottom: 25px;
-    font-family: 'Great Vibes', cursive; /* iPhone-safe Schrift */
+    color: #d81b60; font-size: 3.2em; margin-bottom: 25px;
+    font-family: 'Great Vibes', cursive; /* iPhone-sicher */
     text-shadow: 0px 0px 15px rgba(255, 255, 255, 1); 
     animation: heartbeat 1.5s infinite;
 }
 
 .success-screen p {
     font-family: 'Georgia', serif; font-style: italic;
-    color: #fffdf5; /* Warmes Wunsch-Creme */
-    font-size: 1.6em; text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5); 
+    color: #fffdf5; font-size: 1.5em; text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5); 
 }
 
 @keyframes heartbeat { 0%, 30% { transform: scale(1); } 15% { transform: scale(1.04); } }
