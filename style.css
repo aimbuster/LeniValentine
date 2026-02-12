@@ -1,6 +1,5 @@
 :root {
     --captcha-blue: #4A90E2;
-    --captcha-bg: #f9f9f9;
     --valentine-pink: #ff6b81;
 }
 
@@ -39,21 +38,16 @@ body {
     z-index: 10;
 }
 
-.checkbox-container { display: flex; align-items: center; }
-.checkbox { width: 24px; height: 24px; border: 2px solid #c1c1c1; border-radius: 2px; margin-right: 12px; cursor: pointer; background: #fff; }
+.checkbox { width: 24px; height: 24px; border: 2px solid #c1c1c1; border-radius: 2px; cursor: pointer; }
 .checkbox.loading { border-radius: 50%; border-top: 2px solid var(--captcha-blue); animation: spin 1s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
-.captcha-logo { display: flex; flex-direction: column; align-items: center; font-size: 10px; color: #555; }
-.captcha-logo img { width: 32px; }
-.privacy-links { font-size: 8px; color: #999; }
 
-/* --- Step 2: Modal --- */
+/* --- Step 2: Modal (Höher für iPhone) --- */
 .captcha-modal {
     background: #fff;
     width: 95%;
     max-width: 400px;
     border: 1px solid #ccc;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     padding: 8px;
     display: flex;
     flex-direction: column;
@@ -74,7 +68,7 @@ body {
 }
 .valentine-mode .tile.selected::after { background: var(--valentine-pink); content: '❤️'; }
 .modal-footer { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-top: 1px solid #ececec; }
-.verify-btn { background: var(--captcha-blue); color: #fff; border: none; padding: 12px 24px; font-weight: bold; cursor: pointer; border-radius: 2px; }
+.verify-btn { background: var(--captcha-blue); color: #fff; border: none; padding: 12px 24px; font-weight: bold; cursor: pointer; }
 .valentine-mode .verify-btn { background: var(--valentine-pink); }
 .verify-btn:disabled { background: #ccc; cursor: default; }
 
@@ -85,33 +79,29 @@ body {
     display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; z-index: 100;
 }
 
-/* FIX: Kasten passt sich jetzt dem Text an */
 .success-screen h1, .success-screen p {
     background: rgba(255, 255, 255, 0.15); 
     backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
     padding: 20px 40px;
     border-radius: 30px;
     display: inline-block; 
-    width: fit-content;    /* <--- Passt Breite an Text an */
-    max-width: 85%;        /* <--- Verhindert Überlaufen am Handy */
+    width: fit-content;    /* PC-Fix: Kasten schmiegt sich an */
+    max-width: 90%;        /* iPhone-Fix: Passt in den Bildschirm */
     box-sizing: border-box;
 }
 
 .success-screen h1 {
     color: #d81b60; 
-    font-size: 3.2em; 
+    font-size: 2.8em; /* Etwas kleiner, da die Schrift sehr wuchtig ist */
     margin-bottom: 25px;
-    font-family: 'Great Vibes', cursive;
+    font-family: 'Permanent Marker', cursive; /* Die "dicke" Alternative */
     text-shadow: 0px 0px 15px rgba(255, 255, 255, 1); 
     animation: heartbeat 1.5s infinite;
 }
 
 .success-screen p {
-    font-family: 'Georgia', serif; 
-    font-style: italic;
-    color: #fffdf5; 
-    font-size: 1.5em; 
-    text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5); 
+    font-family: 'Georgia', serif; font-style: italic;
+    color: #fffdf5; font-size: 1.5em; text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5); 
 }
 
-@keyframes heartbeat { 0%, 30% { transform: scale(1); } 15% { transform: scale(1.04); } }
+@keyframes heartbeat { 0%, 30% { transform: scale(1); } 15% { transform: scale(1.05); } }
